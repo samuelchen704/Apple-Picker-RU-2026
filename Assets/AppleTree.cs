@@ -1,45 +1,43 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class AppleTree : MonoBehaviour
-{
+public class AppleTree : MonoBehaviour {
     [Header("Inscribed")]
-    public GameObject applePrefab;
-    public float speed = 1f;
-    public float leftAndRightEdge = 24;
-    public float changeDirChance = 0.1f;
-    public float appleDropDelay = 1f;
+    public GameObject   applePrefab;
+    public float        speed = 10f;
+    public float        leftAndRightEdge = 24;
+    public float        changeDirChance = 0.02f;
+    public float        appleDropDelay = 1f;
 
-    private void Start()
-    {
-        StartCoroutine(AppleDropper());
+    void Start() =>
+        // Start dropping apples
+        Invoke("DropApple", 2f);
+
+    void DropApple() {
+        GameObject apple = Instantiate<GameObject>( applePrefab );
+        apple.transform.position = transform.position;
+        Invoke( "DropApple", appleDropDelay );
     }
 
-    private void Update()
-    {
-        transform.position += Vector3.right * speed * Time.deltaTime;
+    void Update() {
+        // Basic Movement
+        Vector3 pos = transform.position;
+        pos.x += speed * Time.deltaTime;
+        transform.position = pos;
 
-        if (transform.position.x < -leftAndRightEdge ||
-            transform.position.x > leftAndRightEdge)
-        {
-            speed = -speed;
-        }
-        else if (Random.value < changeDirChance * Time.deltaTime)
-        {
-            speed = -speed;
+        // Changing Direction
+        if ( pos.x < -leftAndRightEdge ) {
+            speed = Mathf.Abs( speed ); // Move right
+        } else if ( pos.x > leftAndRightEdge ) {
+            speed = -Mathf.Abs( speed ); // Move left
         }
     }
 
-    private IEnumerator AppleDropper()
-    {
-        while (true)
-        {
-            if (applePrefab != null)
-            {
-                Instantiate(applePrefab, transform.position, Quaternion.identity);
-            }
-
-            yield return new WaitForSeconds(appleDropDelay);
+    void FixedUpdate() {
+        // Random direction changes are time-based due to FixedUpdate()
+        if ( Random.value < changeDirChance ) {
+            speed *= -1; // Change direction
         }
     }
 }
