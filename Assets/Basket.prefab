@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 2243328268439372251}
   - component: {fileID: 1734491617474697146}
   - component: {fileID: -5669478245846538920}
+  - component: {fileID: -5420501535026888344}
+  - component: {fileID: -4409214886123789340}
   m_Layer: 0
   m_Name: Basket
   m_TagString: Untagged
@@ -153,3 +155,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0c81db6790034ecaae86fc49e4f2573, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+--- !u!114 &-5420501535026888344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6047544927393983940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0c81db6790034ecaae86fc49e4f2573, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Basket
+--- !u!114 &-4409214886123789340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6047544927393983940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0c81db6790034ecaae86fc49e4f2573, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Basket

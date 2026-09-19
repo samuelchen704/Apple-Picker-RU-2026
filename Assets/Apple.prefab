@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: 6309754026124928217}
   - component: {fileID: 3725086450309646458}
   - component: {fileID: 4594914202864333400}
-  m_Layer: 0
+  - component: {fileID: 407997505624118936}
+  m_Layer: 7
   m_Name: Apple
   m_TagString: Apple
   m_Icon: {fileID: 0}
@@ -153,3 +154,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c588fc55a6fda44a2a23566ff503c302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  points: 100
+--- !u!114 &407997505624118936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2310278676275044293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c588fc55a6fda44a2a23566ff503c302, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Apple
+  points: 100
