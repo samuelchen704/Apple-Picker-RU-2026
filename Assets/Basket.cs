@@ -1,60 +1,30 @@
-using System.Diagnostics;
 using UnityEngine;
 
-public interface IBasket
+public class Basket : MonoBehaviour
 {
-    ScoreCounter ScoreCounter { get; set; }
-}
-
-public interface IBasket1
-{
-    ScoreCounter ScoreCounter { get; set; }
-}
-
-public interface IBasket2
-{
-    ScoreCounter ScoreCounter { get; set; }
-}
-
-public interface IBasket3
-{
-    ScoreCounter ScoreCounter { get; set; }
-}
-
-public interface IBasket4
-{
-    ScoreCounter ScoreCounter { get; set; }
-}
-
-[DebuggerDisplay("{"
-                 + nameof(DebuggerDisplay
-)
-                 + "(),nq}")]
-public class Basket : MonoBehaviour, IBasket, IBasket1, IBasket2, IBasket3, IBasket4
-{
-    private ScoreCounter scoreCounter;
-
-    public ScoreCounter ScoreCounter { get => scoreCounter; set => scoreCounter = value; }
-
-    public Basket()
-    {
-    }
+    public ScoreCounter scoreCounter;
 
     void Start()
     {
+        // Find a GameObject named ScoreCounter in the Scene Hierarchy
         GameObject scoreGO = GameObject.Find("ScoreCounter");
         if (scoreGO == null)
         {
             return;
         }
-        ScoreCounter = scoreGO.GetComponent<ScoreCounter>();
+        // Get the ScoreCounter (Script) component of scoreGO
+        scoreCounter = scoreGO.GetComponent<ScoreCounter>();
     }
 
     void Update()
     {
         // Get the current screen position of the mouse from Input
         Vector3 mousePos2D = Input.mousePosition;
+
+        // The Camera's z position sets how far to push the mouse into 3D
         mousePos2D.z = -Camera.main.transform.position.z;
+
+        // Convert the point from 2D screen space into 3D game world space
         Vector3 mousePos3D = Camera.main.ScreenToWorldPoint(mousePos2D);
 
         // Move the x position of this Basket to the x position of the Mouse
@@ -65,21 +35,21 @@ public class Basket : MonoBehaviour, IBasket, IBasket1, IBasket2, IBasket3, IBas
 
     void OnCollisionEnter(Collision coll)
     {
+        // Find out what hit this basket
         GameObject collidedWith = coll.gameObject;
         if (collidedWith.CompareTag("Apple") || collidedWith.CompareTag("Gold Apple"))
         {
             Apple appleScript = collidedWith.GetComponent<Apple>();
-            int pts = (appleScript != null) ? appleScript.points : 100;
+            int pts = appleScript != null ? appleScript.points : 100;
+            Destroy( collidedWith );
 
-            Destroy(collidedWith);
-
-            if (ScoreCounter == null)
+            if (scoreCounter == null)
             {
                 return;
             }
-            ScoreCounter.score += pts;
+            // Increase the score and check for a new high score
+            scoreCounter.score += pts;
+            HighScore.TRY_SET_HIGH_SCORE(scoreCounter.score);
         }
     }
-
-    private string DebuggerDisplay => ToString();
 }
